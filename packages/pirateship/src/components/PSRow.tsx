@@ -15,8 +15,8 @@ const arrowImg = require('../../assets/images/arrow.png');
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 18,
-    paddingBottom: 18,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
     flexDirection: 'row',
@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.base,
     color: palette.onBackground
+  },
+  categoryImage: {
+    width: 50,
+    height: 50
   }
 });
 
@@ -43,6 +47,7 @@ export interface PSRowProps {
   textStyle?: StyleProp<TextStyle>;
   showImage?: boolean;
   renderImage?: () => JSX.Element;
+  categoryImage?: Image;
 }
 
 export default class PSRow extends Component<PSRowProps> {
@@ -62,7 +67,10 @@ export default class PSRow extends Component<PSRowProps> {
     return (
       <TouchableHighlight onPress={onPress} underlayColor={palette.surface}>
         <View style={[styles.container, style]}>
-          <Text style={[styles.title, textStyle]}>{title}</Text>
+
+          {this.props.categoryImage &&
+            <Image source={this.props.categoryImage} style={styles.categoryImage} />}
+          <Text style={[textStyle, styles.title]}>{title}</Text>
           {showImage && this.renderImage()}
         </View>
       </TouchableHighlight>

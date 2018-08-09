@@ -25,5 +25,9 @@ export const style = StyleSheet.create({
     fontSize: 15,
     fontWeight: '500',
     paddingLeft: 10
+  },
+  categoryImage: {
+    width: 50,
+    height: 50
   }
 });

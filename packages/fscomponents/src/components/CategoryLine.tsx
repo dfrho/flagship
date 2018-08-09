@@ -58,7 +58,7 @@ export class CategoryLine extends PureComponent<CategoryLineProps> {
         href={href}
       >
         <View style={S.rowInner}>
-          {showImage && image && <Image source={image} style={imageStyle} />}
+          {showImage && image && <Image source={image} style={S.categoryImage} />}
           <Text style={[S.buttonText, titleStyle]}>
             {title}
           </Text>

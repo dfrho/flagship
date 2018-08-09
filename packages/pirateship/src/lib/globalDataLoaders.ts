@@ -67,6 +67,7 @@ export async function loadPromoProducts(): Promise<void> {
 function formatCategories(rootCategory: CommerceTypes.Category): any {
   return (rootCategory.categories || []).map(subCategory => ({
     id: subCategory.id,
+    image: subCategory.image ? subCategory.image : '',
     handle: subCategory.id,
     title: subCategory.title,
     items: (subCategory.categories || []).map(subSubCategory => ({

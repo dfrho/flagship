@@ -38,7 +38,7 @@ export interface PSShopLandingCategoriesProps {
 
 export default class PSShopLandingCategories extends Component<
   PSShopLandingCategoriesProps
-> {
+  > {
   handleItemPress = (category: CommerceTypes.Category) => () => {
     this.props.onItemPress(category);
   }
@@ -53,16 +53,18 @@ export default class PSShopLandingCategories extends Component<
     if (!this.props.categories) {
       return <Loading style={styles.loading} />;
     }
-
-    return this.props.categories.map((category, i) => (
-      <PSRow
-        key={i}
-        title={category.title}
-        onPress={this.handleItemPress(category)}
-        showImage={true}
-        renderImage={this.renderImage}
-      />
-    ));
+    return this.props.categories.map((category, i) =>
+      (
+        <PSRow
+          key={i}
+          title={category.title}
+          onPress={this.handleItemPress(category)}
+          showImage={true}
+          renderImage={this.renderImage}
+          categoryImage={category.image}
+        />
+      )
+    );
   }
 
   render(): JSX.Element {

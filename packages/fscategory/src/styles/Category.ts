@@ -4,7 +4,8 @@ export const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    width: '100%'
+    width: '100%',
+    justifyContent: 'space-between'
   },
   list: {
     flex: 1
