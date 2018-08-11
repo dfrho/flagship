@@ -130,7 +130,7 @@ export function animatedScrollTo(element: any, target: number, duration: number)
   let distance = target - start_top;
 
   // based on http://en.wikipedia.org/wiki/Smoothstep
-  let smooth_step = function(start: number, end: number, point: number) {
+  let smooth_step = function (start: number, end: number, point: number) {
     if (point <= start) {
       return 0;
     }
@@ -141,9 +141,9 @@ export function animatedScrollTo(element: any, target: number, duration: number)
     return x * x * (3 - 2 * x);
   };
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     let previous_top = element.scrollLeft;
-    let scroll_frame = function() {
+    let scroll_frame = function () {
       if (element.scrollLeft != previous_top) {
         return;
       }

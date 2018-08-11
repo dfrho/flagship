@@ -1,6 +1,7 @@
 import { dataSource } from './datasource';
-import { CommerceTypes } from '@brandingbrand/fscommerce';
-import { env as appEnv } from '@brandingbrand/fsapp';
+import { CommerceTypes } from '../../../fscommerce/dist';
+import { env as appEnv } from '../../../fsapp/dist';
+import { getCategoryImage } from './getCategoryImage';
 
 import {
   UPDATE_ACCOUNT,
@@ -9,7 +10,7 @@ import {
   UPDATE_TOP_CATEGORIES
 } from './constants';
 
-import app from '../index';
+import app from '..';
 
 export async function loadCartData(): Promise<void> {
   return dataSource.fetchCart().then(cartData => {
@@ -32,6 +33,7 @@ export async function loadTopCategories(): Promise<void> {
   return dataSource
     .fetchCategory()
     .then(data => {
+      formatCategories(data).slice(0, 10);
       app.store.dispatch({
         type: UPDATE_TOP_CATEGORIES,
         data: formatCategories(data).slice(0, 10)
@@ -65,12 +67,12 @@ export async function loadPromoProducts(): Promise<void> {
 }
 
 function formatCategories(rootCategory: CommerceTypes.Category): any {
-  return (rootCategory.categories || []).map(subCategory => ({
+  return (rootCategory.categories || []).map((subCategory: CommerceTypes.Category) => ({
     id: subCategory.id,
-    image: subCategory.image ? subCategory.image : '',
+    image: getCategoryImage(subCategory.id),
     handle: subCategory.id,
     title: subCategory.title,
-    items: (subCategory.categories || []).map(subSubCategory => ({
+    items: (subCategory.categories || []).map((subSubCategory: CommerceTypes.Category) => ({
       id: subSubCategory.id,
       title: subSubCategory.title
     }))

@@ -11,8 +11,8 @@ import {
   View
 } from 'react-native';
 
-import { SearchBar } from '@brandingbrand/fscomponents';
-import { env as projectEnv } from '@brandingbrand/fsapp';
+import { SearchBar } from '../../../fscomponents/dist';
+import { env as projectEnv } from '../../../fsapp/dist';
 
 import PSScreenWrapper from '../components/PSScreenWrapper';
 import PSWelcome from '../components/PSWelcome';
@@ -124,8 +124,8 @@ const ShopStyle = StyleSheet.create({
 
 export interface ShopProps
   extends ScreenProps,
-    Pick<CombinedStore, 'account' | 'topCategory' | 'promoProducts'>,
-    Pick<AccountActionProps, 'signOut'> {}
+  Pick<CombinedStore, 'account' | 'topCategory' | 'promoProducts'>,
+  Pick<AccountActionProps, 'signOut'> { }
 
 class Shop extends Component<ShopProps> {
   static navigatorStyle: NavigatorStyle = navBarFullBleed;
@@ -219,6 +219,7 @@ class Shop extends Component<ShopProps> {
   }
 
   render(): JSX.Element {
+
     return (
       <PSScreenWrapper
         needInSafeArea={true}
@@ -317,12 +318,15 @@ class Shop extends Component<ShopProps> {
   }
 
   goToAllCategories = () => {
+
     this.props.navigator.push({
       screen: 'Category',
       title: translate.string(translationKeys.screens.allCategories.title),
       passProps: {
-        categoryId: '',
-        format: 'list'
+        format: 'list',
+        categories: this.props &&
+          this.props.topCategory &&
+          this.props.topCategory.categories
       }
     });
   }

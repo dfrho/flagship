@@ -3,8 +3,8 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import PSRow from './PSRow';
 import { border, fontSize, palette } from '../styles/variables';
-import { CommerceTypes } from '@brandingbrand/fscommerce';
-import { Loading, NavArrow } from '@brandingbrand/fscomponents';
+import { CommerceTypes } from '../../../fscommerce/dist';
+import { Loading, NavArrow } from '../../../fscomponents/dist';
 
 const styles = StyleSheet.create({
   loading: {
@@ -55,14 +55,14 @@ export default class PSShopLandingCategories extends Component<
     }
     return this.props.categories.map((category, i) =>
       (
-        <PSRow
-          key={i}
-          title={category.title}
-          onPress={this.handleItemPress(category)}
-          showImage={true}
-          renderImage={this.renderImage}
-          categoryImage={category.image}
-        />
+      <PSRow
+        key={i}
+        title={category.title}
+        onPress={this.handleItemPress(category)}
+        showImage={true}
+        renderImage={this.renderImage}
+        categoryImage={category.image}
+      />
       )
     );
   }

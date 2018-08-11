@@ -1,14 +1,16 @@
-import { BazaarvoiceDataSource } from '@brandingbrand/fsbazaarvoice';
+import { BazaarvoiceDataSource } from '../../../fsbazaarvoice/dist';
 import BBPlatformDataSource from './BBPlatformDataSource';
-import { CommerceCloudDataSource } from '@brandingbrand/fssalesforce';
-import FSNetwork from '@brandingbrand/fsnetwork';
+import { CommerceCloudDataSource } from '../../../fssalesforce/dist';
+import FSNetwork from '../../../fsnetwork/dist';
 import { commerceCloudMiddleware } from './commerceCloudMiddleware';
-import { ShopifyDataSource } from '@brandingbrand/fsshopify';
-import { env } from '@brandingbrand/fsapp';
-import { MockCommerceDataSource, MockReviewDataSource } from '@brandingbrand/fsmockdatasources';
+import { ShopifyDataSource } from '../../../fsshopify/dist';
+import { env } from '../../../fsapp/dist';
+import { MockCommerceDataSource, MockReviewDataSource } from '../../../fsmockdatasources/dist';
 
-type CommerceDataSource = import ('@brandingbrand/fscommerce').CommerceDataSource;
-type ReviewDataSource = import ('@brandingbrand/fscommerce').ReviewDataSource;
+// tslint:disable-next-line:whitespace
+type CommerceDataSource = import('../../../fscommerce/dist').CommerceDataSource;
+// tslint:disable-next-line:whitespace
+type ReviewDataSource = import('../../../fscommerce/dist').ReviewDataSource;
 
 const { dataSourceConfigs } = env;
 

@@ -9,25 +9,37 @@ export { RegisteredStyle, ViewStyle, TextStyle, ImageStyle };
 
 export const style = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: 'white',
+    paddingTop: 15,
+    paddingBottom: 16,
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#cdcdcd'
+    borderBottomColor: '#dedede',
+    height: 95
   },
   rowInner: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingRight: 15
   },
   buttonText: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '500',
-    paddingLeft: 10
+    paddingLeft: 20
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   categoryImage: {
-    width: 50,
-    height: 50
+    height: 64,
+    width: 63
   }
 });

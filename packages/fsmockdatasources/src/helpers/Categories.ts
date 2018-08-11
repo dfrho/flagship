@@ -2,7 +2,7 @@
 
 export const Categories: import ('@brandingbrand/fscommerce').CommerceTypes.Category = {
   id: 'root',
-  title: 'Storefront Catalog - EN',
+  title: 'Top Categories',
   handle: 'root',
   categories: [{
     id: 'mens',

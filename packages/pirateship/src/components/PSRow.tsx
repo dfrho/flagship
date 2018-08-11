@@ -15,28 +15,37 @@ const arrowImg = require('../../assets/images/arrow.png');
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 15,
+    paddingBottom: 16,
     paddingLeft: 15,
     paddingRight: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: border.width,
-    borderBottomColor: border.color
+    borderBottomColor: border.color,
+    height: 95
   },
   arrow: {
     width: 15,
     height: 15,
+    paddingRight: 10,
     transform: [{ rotate: '180deg' }]
   },
   title: {
     fontSize: fontSize.base,
-    color: palette.onBackground
+    fontWeight: '500',
+    color: palette.onBackground,
+    paddingLeft: 25
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   categoryImage: {
-    width: 50,
-    height: 50
+    height: 64,
+    width: 63
   }
 });
 
@@ -47,7 +56,7 @@ export interface PSRowProps {
   textStyle?: StyleProp<TextStyle>;
   showImage?: boolean;
   renderImage?: () => JSX.Element;
-  categoryImage?: Image;
+  categoryImage?: object;
 }
 
 export default class PSRow extends Component<PSRowProps> {
@@ -68,9 +77,11 @@ export default class PSRow extends Component<PSRowProps> {
       <TouchableHighlight onPress={onPress} underlayColor={palette.surface}>
         <View style={[styles.container, style]}>
 
-          {this.props.categoryImage &&
-            <Image source={this.props.categoryImage} style={styles.categoryImage} />}
-          <Text style={[textStyle, styles.title]}>{title}</Text>
+          <View style={styles.cardContainer}>
+            {this.props.categoryImage &&
+              <Image source={this.props.categoryImage} style={styles.categoryImage} />}
+            <Text style={[styles.title, textStyle]}>{title}</Text>
+          </View>
           {showImage && this.renderImage()}
         </View>
       </TouchableHighlight>

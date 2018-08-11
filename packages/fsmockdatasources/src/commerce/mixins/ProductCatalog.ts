@@ -15,8 +15,8 @@ import {
 
 export const ProductCatalogMixin = <T extends Constructor>(superclass: T) => {
   return class ProductCatalogMixin extends superclass implements ProductCatalogDataSource,
-                                                                 ProductRecommendationDataSource,
-                                                                 ProductSearchDataSource {
+    ProductRecommendationDataSource,
+    ProductSearchDataSource {
     async fetchProduct(id: string): Promise<CommerceTypes.Product> {
       const product = Products.find(product => product.id === id);
 
@@ -112,8 +112,8 @@ export const ProductCatalogMixin = <T extends Constructor>(superclass: T) => {
         .map(brand => ({ title: brand }));
 
       const suggestedCategories = categories
-        .filter(cat => cat.title.toLowerCase().includes(lowerCaseQuery))
-        .map(cat => ({
+        .filter((cat: CommerceTypes.Category) => cat.title.toLowerCase().includes(lowerCaseQuery))
+        .map((cat: CommerceTypes.Category) => ({
           categoryId: cat.id,
           title: cat.title
         }));
@@ -186,7 +186,8 @@ export const ProductCatalogMixin = <T extends Constructor>(superclass: T) => {
 
     public applyRefinementFilters(
       products: CommerceTypes.Product[],
-      refinements?: import ('@brandingbrand/fsfoundation').Dictionary<string>
+      // tslint:disable-next-line:whitespace
+      refinements?: import('@brandingbrand/fsfoundation').Dictionary<string>
     ): CommerceTypes.Product[] {
       if (refinements) {
         products = Object.keys(refinements).reduce((filteredProducts, key) => {

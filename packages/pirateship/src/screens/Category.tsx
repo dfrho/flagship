@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Dimensions, View } from 'react-native';
-import { Category as FSCategory } from '@brandingbrand/fscategory';
-
+import { Category as FSCategory } from '../../../fscategory/dist';
 import PSScreenWrapper from '../components/PSScreenWrapper';
 import { dataSource, dataSourceConfig } from '../lib/datasource';
 import { backButton, searchButton } from '../lib/navStyles';
 import { navBarDefault } from '../styles/Navigation';
 import { NavButton, NavigatorStyle, ScreenProps } from '../lib/commonTypes';
-import { CommerceTypes } from '@brandingbrand/fscommerce';
-import { NavArrow } from '@brandingbrand/fscomponents';
+import { CommerceTypes } from '../../../fscommerce/dist';
+import { NavArrow } from '../../../fscomponents/dist';
 import { palette } from '../styles/variables';
 
 // Default padding for CategoryBox component
@@ -34,14 +33,14 @@ const listItemProps = {
     padding: 0
   },
   titleStyle: {
-    fontSize: 15,
-    textAlign: 'left',
+    fontSize: 16,
     height: 35,
-    marginTop: 20
+    marginTop: 20,
+    marginLeft: 20
   },
   renderAccessory: (): JSX.Element => {
     return (
-      <NavArrow color={palette.primary} style={{marginRight: 10}} />
+      <NavArrow color={palette.primary} style={{ marginRight: 10 }} />
     );
   }
 };
@@ -49,9 +48,10 @@ const listItemProps = {
 export interface CategoryProps {
   categoryId: string;
   format?: string;
+  categories?: CommerceTypes.Category[];
 }
 
-export interface PropType extends CategoryProps, ScreenProps {}
+export interface PropType extends CategoryProps, ScreenProps { }
 
 export interface StateType {
   screenWidth: number;
@@ -100,7 +100,8 @@ export default class Category extends Component<PropType, StateType> {
 
       const passProps: any = {
         categoryId: category.id,
-        title: category.title || ''
+        title: category.title || '',
+        image: category.image && category.image
       };
 
       if (screen === 'Category') {
@@ -113,13 +114,13 @@ export default class Category extends Component<PropType, StateType> {
         passProps
       });
     })
-    .catch(err => {
-      console.warn(err);
-    });
+      .catch(err => {
+        console.warn(err);
+      });
   }
 
   render(): JSX.Element {
-    const { categoryId, format } = this.props;
+    const { categoryId, format, categories } = this.props;
     const categoryFormat = format && format === 'list' ? 'list' : 'grid';
     const margin = categoryFormat === 'grid' ? 15 : 0;
     const itemProps: any =
@@ -131,7 +132,7 @@ export default class Category extends Component<PropType, StateType> {
       if (this.state.screenWidth) {
         imageWidth = Math.floor(
           (this.state.screenWidth - margin * 2) / 2 -
-            CATEGORY_BOX_DEFAULT_PADDING
+          CATEGORY_BOX_DEFAULT_PADDING
         );
         imageWidth = Math.min(imageWidth, DEFAULT_IMAGE_WIDTH);
       }
@@ -146,6 +147,7 @@ export default class Category extends Component<PropType, StateType> {
       <PSScreenWrapper>
         <View style={{ margin }}>
           <FSCategory
+            categories={categories}
             format={categoryFormat}
             commerceDataSource={dataSource}
             categoryId={categoryId}

@@ -42,7 +42,6 @@ export class CategoryLine extends PureComponent<CategoryLineProps> {
       accessoryStyle,
       href,
       image,
-      showImage,
       imageStyle,
       style,
       title,
@@ -58,10 +57,14 @@ export class CategoryLine extends PureComponent<CategoryLineProps> {
         href={href}
       >
         <View style={S.rowInner}>
-          {showImage && image && <Image source={image} style={S.categoryImage} />}
-          <Text style={[S.buttonText, titleStyle]}>
-            {title}
-          </Text>
+          <View >
+            <View style={S.cardContainer}>
+              {image && <Image source={image} style={[imageStyle, S.categoryImage]} />}
+              <Text style={titleStyle}>
+                {title}
+              </Text>
+            </View>
+          </View>
           {showAccessory && accessorySrc &&
             <Image source={accessorySrc} style={accessoryStyle} resizeMode='contain' />
           }

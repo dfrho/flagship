@@ -20,6 +20,7 @@ import {
 } from '@brandingbrand/fscomponents';
 
 export interface UnwrappedCategoryProps {
+  categories?: CommerceTypes.Category[];
   categoryId?: string;
   format?: 'list' | 'grid';
   columns?: number;
@@ -38,7 +39,7 @@ export type CategoryProps = UnwrappedCategoryProps &
 
 export class Category extends Component<
   UnwrappedCategoryProps & WithCommerceProps<CommerceTypes.Category>
-> {
+  > {
   componentDidMount(): void {
     if (this.props.commerceLoadData) {
       this.props.commerceLoadData();
@@ -55,11 +56,10 @@ export class Category extends Component<
 
   render(): JSX.Element {
     const { commerceData, format, style, loadingStyle } = this.props;
-
     let content = null;
     let hasImages = false;
 
-    if (commerceData) {
+    if (commerceData && commerceData.categories) {
       if (format !== 'list' && commerceData.categories) {
         const categories = commerceData.categories;
 
@@ -70,7 +70,6 @@ export class Category extends Component<
           }
         }
       }
-
       if (hasImages) {
         content = <CategoryGrid {...this.props} />;
       } else {

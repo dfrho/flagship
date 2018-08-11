@@ -1,5 +1,3 @@
-import { Image } from './Image';
-
 /**
  * Information about a category. Categories contain sub-categories and/or products.
  */
@@ -29,12 +27,12 @@ export interface Category {
    *
    * @example 'https://www.example.com/images/partysupplies.png'
    */
-  image?: Image;
+  image?: object;
 
   /**
    * An array of subcategories.
    */
-  categories?: Category[];
+  categories?: Category[] | any;
 
   /**
    * A title to be displayed in a browser tab for a category.

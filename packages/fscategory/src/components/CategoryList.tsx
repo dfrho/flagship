@@ -8,15 +8,33 @@ import { UnwrappedCategoryProps } from './Category';
 
 export default class CategoryList extends Component<
   UnwrappedCategoryProps & WithCommerceDataProps<CommerceTypes.Category>
-> {
+  > {
+  // tslint:disable-next-line:cyclomatic-complexity
   render(): React.ReactNode {
-    const { listStyle, commerceData } = this.props;
+    const { listStyle, commerceData, categories } = this.props;
+
+    let commerceCategories;
+
+    if (categories && commerceData && commerceData.categories) {
+      commerceCategories = commerceData.categories;
+      // tslint:disable-next-line:forin
+      for (const index in categories) {
+        if (commerceCategories.length) {
+          for (const j in commerceCategories) {
+            if (commerceCategories[j].id === categories[index].id) {
+              commerceCategories[j] = { ...commerceCategories[j], ...categories[index] };
+            }
+          }
+        }
+      }
+    }
 
     if (commerceData && commerceData.categories) {
+
       return (
         <FlatList
           style={[S.list, listStyle]}
-          data={commerceData.categories}
+          data={commerceCategories || commerceData.categories}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           {...this.props.listViewProps}
