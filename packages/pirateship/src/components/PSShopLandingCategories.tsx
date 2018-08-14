@@ -55,14 +55,14 @@ export default class PSShopLandingCategories extends Component<
     }
     return this.props.categories.map((category, i) =>
       (
-      <PSRow
-        key={i}
-        title={category.title}
-        onPress={this.handleItemPress(category)}
-        showImage={true}
-        renderImage={this.renderImage}
-        categoryImage={category.image}
-      />
+        <PSRow
+          key={i}
+          categoryImage={category.image}
+          title={category.title}
+          onPress={this.handleItemPress(category)}
+          showImage={true}
+          renderImage={this.renderImage}
+        />
       )
     );
   }

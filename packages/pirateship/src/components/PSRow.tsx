@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
   }
 });
 
+interface CategoryImage {
+  uri?: string;
+}
+
 export interface PSRowProps {
   onPress: () => void;
   title: string;
@@ -56,7 +60,7 @@ export interface PSRowProps {
   textStyle?: StyleProp<TextStyle>;
   showImage?: boolean;
   renderImage?: () => JSX.Element;
-  categoryImage?: object;
+  categoryImage?: CategoryImage;
 }
 
 export default class PSRow extends Component<PSRowProps> {
@@ -71,15 +75,15 @@ export default class PSRow extends Component<PSRowProps> {
   }
 
   render(): JSX.Element {
-    const { onPress, showImage, style, textStyle, title } = this.props;
+    const { categoryImage, onPress, showImage, style, textStyle, title } = this.props;
 
     return (
       <TouchableHighlight onPress={onPress} underlayColor={palette.surface}>
         <View style={[styles.container, style]}>
 
           <View style={styles.cardContainer}>
-            {this.props.categoryImage &&
-              <Image source={this.props.categoryImage} style={styles.categoryImage} />}
+            {categoryImage && categoryImage.uri &&
+              < Image source={categoryImage} style={styles.categoryImage} />}
             <Text style={[styles.title, textStyle]}>{title}</Text>
           </View>
           {showImage && this.renderImage()}

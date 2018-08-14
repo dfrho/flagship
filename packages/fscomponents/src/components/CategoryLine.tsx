@@ -14,6 +14,10 @@ import { TouchableHighlightLink } from './TouchableHighlightLink';
 
 import { style as S } from '../styles/CategoryLine';
 
+interface CategoryImage {
+  uri?: string;
+}
+
 export interface CategoryLineProps extends CommerceTypes.Category {
   accessorySrc?: ImageURISource;
   accessoryStyle?: StyleProp<ImageStyle>;
@@ -26,6 +30,7 @@ export interface CategoryLineProps extends CommerceTypes.Category {
   style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   underlayColor?: string;
+  image?: CategoryImage;
 }
 
 export class CategoryLine extends PureComponent<CategoryLineProps> {
@@ -59,7 +64,7 @@ export class CategoryLine extends PureComponent<CategoryLineProps> {
         <View style={S.rowInner}>
           <View >
             <View style={S.cardContainer}>
-              {image && <Image source={image} style={[imageStyle, S.categoryImage]} />}
+              {image && image.uri && <Image source={image} style={[imageStyle, S.categoryImage]} />}
               <Text style={titleStyle}>
                 {title}
               </Text>
